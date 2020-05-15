@@ -9,18 +9,7 @@ export default {
         text: 'NEW',
       },
     },
-  
-    {
-      name: 'Profil',
-      url: '/base/forms',
-      icon: 'icon-puzzle',
-    },
-
-    {
-      name: 'Egitim',
-      url: '/base/egitim',
-      icon: 'icon-puzzle',
-    },
+    
 
     {
       name: 'Anasayfa',

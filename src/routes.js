@@ -2,8 +2,6 @@ import React from 'react';
 const Carousels = React.lazy(() => import('./views/Base/Carousels'));
 const Collapses = React.lazy(() => import('./views/Base/Collapses'));
 const Dropdowns = React.lazy(() => import('./views/Base/Dropdowns'));
-const Forms = React.lazy(() => import('./views/Base/Forms'));
-const Egitim = React.lazy(() => import('./views/Base/Egitim'));
 const Anasayfa = React.lazy(() => import('./views/Base/Anasayfa'));
 const Yetkinlik = React.lazy(() => import('./views/Base/Yetkinlik'));
 const Hakkimda = React.lazy(() => import('./views/Base/Hakkimda'));
@@ -24,8 +22,7 @@ const routes = [
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
-  { path: '/base/forms', name: 'Forms', component: Forms },
-  { path: '/base/egitim', name: 'Egitim', component: Egitim },
+  
   { path: '/base/anasayfa', name: 'Anasayfa', component: Anasayfa },
   { path: '/base/yetkinlik', name: 'Yetkinlik', component: Yetkinlik },
   { path: '/base/hakkimda', name: 'Hakkimda', component: Hakkimda },

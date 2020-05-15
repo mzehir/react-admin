@@ -53,7 +53,7 @@ const Yetkinlik = () => {
 
                     <FormGroup row>
                       <Col md="3">
-                        <Label htmlFor="text-input">Yetkin Olununan Bir Alan</Label>
+                        <Label htmlFor="text-input">Yetkin Olunan Bir Alan</Label>
                       </Col>
                       <Col xs="12" md="9">
                         <Input id="okul" name="okul" autoComplete="off" defaultValue={yetkinAlanİsmi} onChange={e => setyetkinAlanİsmi(e.target.value)} />
@@ -61,7 +61,7 @@ const Yetkinlik = () => {
                       </Col>
 
                       <Col md="3">
-                        <Label htmlFor="aciklama">Yetkin olduğunuz Alan İle İlgili Kendinizden Bahsedin.</Label>
+                        <Label htmlFor="aciklama">Yetkin Olduğunuz Alan İle İlgili Kendinizden Bahsedin.</Label>
                       </Col>
                       <Col xs="12" md="9">
                         <textarea
@@ -111,8 +111,6 @@ const Yetkinlik = () => {
                             </tr>
                           )
                         })}
-
-
                       </tbody>
                     </Table>
                   </Col>

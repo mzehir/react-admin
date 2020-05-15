@@ -12,6 +12,7 @@ class Iletisim {
 
     async addIletisim(data) {
         let deneme = await this.getIletisim()
+
         if (!deneme) {
             return firebase.db.collection(`admin`).doc("İletişim").set({
                 "İletişim Bilgileri": data

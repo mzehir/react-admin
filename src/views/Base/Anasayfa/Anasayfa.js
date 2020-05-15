@@ -106,9 +106,17 @@ const Anasayfa = () => {
 
                     {/* **************************************************************************************************************************** */}
 
-                    {/* Buraya kullanıcının fotoğrafı gelecek */}
-
-                    {/* Buraya kullanıcının fotoğrafı gelecek */}
+                    <FormGroup row>
+                      <Col md="3">
+                        <Label for="exampleFile">Fotoğraf</Label>
+                      </Col>
+                      <Col xs="12" md="9">
+                        <Input type="file" name="file" id="exampleFile" />
+                        <FormText color="muted">
+                          Lütfen buradan sitenizin ön yüzünde görünmek üzere fotoğraf yükleyiniz.
+                      </FormText>
+                      </Col>
+                    </FormGroup>
 
                     {/* **************************************************************************************************************************** */}
                     <FormGroup row>

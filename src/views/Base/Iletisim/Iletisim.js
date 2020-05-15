@@ -20,16 +20,14 @@ const Iletisim = () => {
   const [adres, setadres] = useState('')
   const [gsm, setgsm] = useState('')
 
-  // useEffect(() => {
-  //   firebase.getIletisim().then(((data) => {
-
-  //     if (data) {
-  //       setadres(data.adres)
-  //       setgsm(data.gsm)
-  //     }
-
-  //   }))
-  // })
+  useEffect(() => {
+    firebase.getIletisim().then(((data) => {
+      if (data) {
+        setadres(data.adres)
+        setgsm(data.gsm)
+      }
+    }))
+  }, [])
   return (
     <div className="animated fadeIn">
 
@@ -58,7 +56,7 @@ const Iletisim = () => {
                       </Col>
                     </FormGroup>
 
-                    <hr></hr>
+                    <hr className="bg-primary"></hr>
 
                     <FormGroup row>
                       <Col md="3">
@@ -91,7 +89,6 @@ const Iletisim = () => {
         adres: adres,
         gsm: gsm,
       }
-
       await firebase.addIletisim(data)
     } catch (error) {
       alert(error.message)

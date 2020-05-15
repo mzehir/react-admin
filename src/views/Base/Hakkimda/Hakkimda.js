@@ -149,7 +149,7 @@ const Hakkimda = () => {
 
                     <FormGroup row>
                       <Col md="3">
-                        <Label htmlFor="text-input">Mezun Olunan İlkokul</Label>
+                        <Label htmlFor="text-input">Mezun Olunan Okul</Label>
                       </Col>
                       <Col xs="12" md="9">
                         <Input id="Meslek" name="Meslek" autoComplete="off" defaultValue={mezunOlunanOkul} onChange={e => setmezunOlunanOkul(e.target.value)} />

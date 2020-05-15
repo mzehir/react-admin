@@ -20,56 +20,62 @@ const Iletisim = () => {
   const [adres, setadres] = useState('')
   const [gsm, setgsm] = useState('')
 
-  useEffect(() => {
-    firebase.getIletisime().then(((data) => {
+  // useEffect(() => {
+  //   firebase.getIletisim().then(((data) => {
 
-      if (data) {
-        setadres(data.adres)
-        setgsm(data.gsm)
-      }
+  //     if (data) {
+  //       setadres(data.adres)
+  //       setgsm(data.gsm)
+  //     }
 
-    }))
-  })
+  //   }))
+  // })
   return (
     <div className="animated fadeIn">
 
       <Row>
-        <Col xs="12" md="6">
+        <Col xs="12" md="12">
           <Card>
-            <CardHeader>
-              <strong>İletişim Bilgileri</strong>
+            <CardHeader className="text-center">
+              <strong >İletişim Sayfa Ayarları</strong>
             </CardHeader>
             <form onSubmit={e => e.preventDefault() && false}>
               <CardBody>
+                <Row>
+                  <Col xs="12" md="12">
+                    <CardHeader className="shadow-lg p-3 mb-5 bg-dark rounded">
+                      <strong>İletişim Ayarları</strong>
+                    </CardHeader>
 
-                <FormGroup row>
-                  <Col md="3">
-                    <Label htmlFor="text-input">Adres</Label>
+                    <FormGroup row>
+                      <Col md="3">
+                        <Label htmlFor="text-input">Adres</Label>
+                      </Col>
+                      <Col xs="12" md="9">
+                        <textarea className="form-control" id="okul" name="okul" autoComplete="off" defaultValue={adres} onChange={e => setadres(e.target.value)} />
+
+                        <FormText color="muted">Buraya iş adresinizi ya da kendinize ait bir adresi yazınız. </FormText>
+                      </Col>
+                    </FormGroup>
+
+                    <hr></hr>
+
+                    <FormGroup row>
+                      <Col md="3">
+                        <Label htmlFor="text-input">Telefon Numarası</Label>
+                      </Col>
+                      <Col xs="12" md="9">
+                        <Input id="okul" name="okul" autoComplete="off" defaultValue={gsm} onChange={e => setgsm(e.target.value)} />
+
+                        <FormText color="muted">Buraya müşterilerin size ulaşabileceği bir telefon numarası yazınız. </FormText>
+                      </Col>
+                    </FormGroup>
                   </Col>
-                  <Col xs="12" md="9">
-                    <Input id="okul" name="okul" autoComplete="off" defaultValue={adres} onChange={e => setadres(e.target.value)} />
-
-                    <FormText color="muted">Buraya iş adresinizi ya da kendinize ait bir adresi yazınız. </FormText>
-                  </Col>
-                </FormGroup>
-
-                <hr></hr>
-
-                <FormGroup row>
-                  <Col md="3">
-                    <Label htmlFor="text-input">Telefon Numarası</Label>
-                  </Col>
-                  <Col xs="12" md="9">
-                    <Input id="okul" name="okul" autoComplete="off" defaultValue={gsm} onChange={e => setgsm(e.target.value)} />
-
-                    <FormText color="muted">Buraya müşterilerin size ulaşabileceği bir telefon numarası yazınız. </FormText>
-                  </Col>
-                </FormGroup>
-
+                </Row>
               </CardBody>
-              <CardFooter>
-                <Button variant="success" onClick={kaydet} className="mx-4"> Kaydet</Button>
-                <Button variant="danger" onClick={sil} >Sil</Button>
+              <CardFooter className="text-center">
+                <Button onClick={kaydet} className="btn btn-success btn-lg mx-4"> Kaydet</Button>
+                <Button onClick={sil} className="btn btn-danger btn-lg mx-4">Sil</Button>
               </CardFooter>
             </form>
           </Card>
@@ -86,23 +92,19 @@ const Iletisim = () => {
         gsm: gsm,
       }
 
-      await firebase.addIletisime(data)
-
+      await firebase.addIletisim(data)
     } catch (error) {
       alert(error.message)
     }
   }
+
   async function sil() {
     try {
-
-
-      await firebase.deleteIletisime()
-
+      await firebase.deleteIletisim()
     } catch (error) {
       alert(error.message)
     }
   }
 
 }
-
 export default Iletisim;

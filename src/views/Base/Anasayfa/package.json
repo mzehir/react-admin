@@ -1,0 +1,6 @@
+{
+  "name": "Anasayfa",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Anasayfa.js"
+}

@@ -20,7 +20,7 @@ class Forms {
     }
     deleteFormse() {
         if (!firebase.auth.currentUser) {
-            return alert('Not authorized')
+            return alert('Not authorized.')
         }
         return firebase.db.collection('admin').doc('formPage').delete
     }

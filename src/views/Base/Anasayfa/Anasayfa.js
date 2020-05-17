@@ -16,6 +16,8 @@ import {
 } from 'reactstrap';
 
 import firebase from '../../config/anasayfa'
+
+
 const Anasayfa = () => {
   const [Meslek, setMeslek] = useState('')
   const [email, setemail] = useState('')
@@ -28,18 +30,28 @@ const Anasayfa = () => {
 
   const [yetenekDali, setyetenekDali] = useState('')
   const [yetenekYuzdesi, setyetenekYuzdesi] = useState('')
-
   const [yetenekDalVeYuzdeList, setyetenekDalVeYuzdeList] = useState([])
 
+  const [sosyalMedya, setsosyalMedya] = useState('')
+  const [sosyalMedyaIcon, setsosyalMedyaIcon] = useState('')
+  const [sosyalMedyaList, setsosyalMedyaList] = useState([])
 
   useEffect(() => {
     firebase.getYetenek().then(((data) => {
-
       if (data) {
         setyetenekDalVeYuzdeList(data)
       }
     }))
   }, [yetenekDalVeYuzdeList])
+
+
+  useEffect(() => {
+    firebase.getSosyalMedyaHesap().then(((data) => {
+      if (data) {
+        setsosyalMedyaList(data)
+      }
+    }))
+  }, [sosyalMedyaList])
 
   return (
     <div className="animated fadeIn">
@@ -98,13 +110,6 @@ const Anasayfa = () => {
                         <FormText color="muted">Lütfen bu alana telefon numaranızı giriniz. Mesela <strong>0 541 999 9999</strong> gibi...</FormText>
                       </Col>
                     </FormGroup>
-                    {/* **************************************************************************************************************************** */}
-
-                    {/* Buraya kullanıcının sosyal medya adresleri eklenek */}
-
-                    {/* Buraya kullanıcının sosyal medya adresleri eklenek */}
-
-                    {/* **************************************************************************************************************************** */}
 
                     <FormGroup row>
                       <Col md="3">
@@ -118,7 +123,6 @@ const Anasayfa = () => {
                       </Col>
                     </FormGroup>
 
-                    {/* **************************************************************************************************************************** */}
                     <FormGroup row>
                       <Col md="3">
                         <Label htmlFor="text-input">Ad ve Soyad</Label>
@@ -193,6 +197,76 @@ const Anasayfa = () => {
                     <p className="text-center">
                       <Button className="btn btn-success mb-3 text-center btn-lg" onClick={kaydetKisiselBilgi}>Kaydet</Button>
                     </p>
+                  </Col>
+                </Row>
+
+                <hr className="bg-dark"></hr>
+
+                <Row>
+                  <Col xs="12" md="6" className="mb-3">
+                    <CardHeader className="shadow-lg p-3 mb-5 bg-dark rounded">
+                      <strong>Sosyal Medya Hesapları</strong>
+                    </CardHeader>
+
+                    <FormGroup row>
+                      <Col md="3">
+                        <Label htmlFor="telefon">Sosyal Medya Hesapları</Label>
+                      </Col>
+                      <Col xs="12" md="9">
+                        <input
+                          defaultValue={sosyalMedya}
+                          className="form-control"
+                          name="adress"
+                          onChange={e => setsosyalMedya(e.target.value)}
+                        />
+                        <FormText color="muted">Lütfen bu alana sosyal medya hesabı profil linkinizi giriniz. <strong>https://github.com/mzehir</strong> gibi...</FormText>
+                      </Col>
+
+                      <Col md="3">
+                        <Label htmlFor="telefon">Sosyal Medya Hesap İconu</Label>
+                      </Col>
+                      <Col xs="12" md="9">
+                        <input
+                          defaultValue={sosyalMedyaIcon}
+                          className="form-control"
+                          name="adress"
+                          onChange={e => setsosyalMedyaIcon(e.target.value)}
+                        />
+                        <FormText color="muted">Öncelikle https://fontawesome.com/ adresine gidelim. Daha sonra arama butonuna iconunu eklemek istediğimiz sosyal medya hesap ismini yazalım.
+                         Mesela <strong>githup</strong> gibi. Sonrasında arama sonucu ile karşımıza gelen iconlardan beğendiğimiz icona tıklayalım. Karşımıza gelen sayfada en üst kısımda yer alan
+                         mesela fab fa-github yazısının <strong>fa-github</strong> bölümünü kopyalayalım ve bu alana yapıştıralım. </FormText>
+                      </Col>
+                    </FormGroup>
+                    <p className="text-center">
+                      <Button onClick={ekleSosyalMedyaHesap} className="btn btn-success btn-lg">Ekle</Button>
+                    </p>
+
+                  </Col>
+                  <Col xs="12" md="6">
+                    <CardHeader className="shadow-lg p-3 mb-5 bg-dark rounded">
+                      <strong>Eklenen Sosyal Medya Hesapları</strong>
+                    </CardHeader>
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Hesap</th>
+                          <th>İcon Kodu</th>
+                          <th>Sil</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {sosyalMedyaList.length > 0 && sosyalMedyaList.map((sosyalMedya, index) => {
+                          return (
+                            <tr key={index}>
+                              <td>{sosyalMedya.sosyalMedya}</td>
+                              <td>{sosyalMedya.sosyalMedyaIcon}</td>
+                              <Button onClick={() => silYetenekVeYuzde(index)} className="btn btn-danger btn-block mt-1">Sil</Button>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </Table>
                   </Col>
                 </Row>
 
@@ -355,7 +429,29 @@ const Anasayfa = () => {
       alert(error.message)
     }
   }
+
+
+  async function ekleSosyalMedyaHesap() {
+    try {
+      var data = {
+        sosyalMedya: sosyalMedya,
+        sosyalMedyaIcon: sosyalMedyaIcon
+      }
+      await firebase.addSosyalMedyaHesap(data)
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
+
+
+
+
+
+
 }
+
+
 
 async function silTumSayfa() {
   try {

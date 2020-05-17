@@ -4,6 +4,9 @@ import { useFieldArray } from 'react-hook-form'
 
 class Anasayfa {
 
+    // ###########################      Anasayfa Bilgilerini Komple Getir         ###################################
+    // ###########################      Anasayfa Bilgilerini Komple Getir         ###################################
+    // ###########################      Anasayfa Bilgilerini Komple Getir         ###################################
     async getAnaSayfa() {
         let cityRef = await firebase.db.collection('admin').doc('AnaSayfa');
         return await cityRef.get()
@@ -20,9 +23,9 @@ class Anasayfa {
             });
     }
 
-    // ###########################      Kişisel Bilgiler         ###################################
-    // ###########################      Kişisel Bilgiler         ###################################
-    // ###########################      Kişisel Bilgiler         ###################################
+    // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
+    // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
+    // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
     async addAnasayfaKisiselBilgi(KişiselBilgiler) {
         let anaSayfaDto = await this.getAnaSayfa();
         // if (anaSayfaDto && anaSayfaDto.KişiselBilgiler) {
@@ -37,9 +40,10 @@ class Anasayfa {
             })
         }
     }
-    // ###########################       Hakkımda                ###################################
-    // ###########################       Hakkımda                ###################################
-    // ###########################       Hakkımda                ###################################
+
+    // ###########################       Hakkımda Bilgilerini Gönder               ###################################
+    // ###########################       Hakkımda Bilgilerini Gönder               ###################################
+    // ###########################       Hakkımda Bilgilerini Gönder               ###################################
     async addAnasayfaHakkimda(Hakkımda) {
         let hakkimdaDto = await this.getAnaSayfa();
         // if (anaSayfaDto && anaSayfaDto.KişiselBilgiler) {
@@ -54,9 +58,10 @@ class Anasayfa {
             })
         }
     }
-    // ###########################     Yetenek ve Tecrübeler     ###################################
-    // ###########################     Yetenek ve Tecrübeler     ###################################
-    // ###########################     Yetenek ve Tecrübeler     ###################################
+
+    // ###########################     Yetenek ve Tecrübeler Bilgilerini Gönderme ve Getirme İşlemleri     ###################################
+    // ###########################     Yetenek ve Tecrübeler Bilgilerini Gönderme ve Getirme İşlemleri    ###################################
+    // ###########################     Yetenek ve Tecrübeler Bilgilerini Gönderme ve Getirme İşlemleri    ###################################
     async getYetenek() {
         const form = await firebase.db.collection('admin').doc('AnaSayfa').get()
         return form.get('yetenek')
@@ -93,9 +98,44 @@ class Anasayfa {
 
     }
 
-     deleteYetenekVeYuzde(data) {
-       
-       
+    // ###########################     Sosyal Medya Hesap Bilgilerini Gönderme ve Getirme İşlemleri    ###################################
+    // ###########################     Sosyal Medya Hesap Bilgilerini Gönderme ve Getirme İşlemleri    ###################################
+    // ###########################     Sosyal Medya Hesap Bilgilerini Gönderme ve Getirme İşlemleri    ###################################
+
+    async getSosyalMedyaHesap() {
+        const sosyalMedyaHesapDto = await firebase.db.collection('admin').doc('AnaSayfa').get()
+        return sosyalMedyaHesapDto.get('sosyalMedyaHesap')
+    }
+
+    async addSosyalMedyaHesap(data) {
+        let anaSayfaDto = await this.getAnaSayfa();
+        let SosyalMedyaHesapDto = await this.getSosyalMedyaHesap();
+        debugger
+
+        if (!anaSayfaDto) {
+            let sosyalMedyaHesap = [];
+            sosyalMedyaHesap.push(data)
+            return firebase.db.collection('admin').doc('AnaSayfa').set({
+                sosyalMedyaHesap
+            })
+        } else if (anaSayfaDto && !SosyalMedyaHesapDto) {
+            let sosyalMedyaHesap = [];
+            sosyalMedyaHesap.push(data)
+            return firebase.db.collection('admin').doc('AnaSayfa').update({
+                sosyalMedyaHesap
+            })
+        } else {
+            let sosyalMedyaHesap = []
+            SosyalMedyaHesapDto.push(data)
+            for (let i = 0; i < SosyalMedyaHesapDto.length; i++) {
+                sosyalMedyaHesap.push(SosyalMedyaHesapDto[i])
+
+            }
+            return firebase.db.collection('admin').doc('AnaSayfa').update({
+                sosyalMedyaHesap
+            })
+        }
+
     }
 
     // ###########################     Anasayfa Dökümanını Silme       ###################################

@@ -74,11 +74,14 @@ const Yetkinlik = () => {
                       </Col>
 
                       <Col md="3">
-                        <Label htmlFor="text-input">Fotoğraf Yükleyiniz.</Label>
+                        <Label htmlFor="text-input">Yetkin Alan İle Alakalı İcon</Label>
                       </Col>
                       <Col xs="12" md="9">
                         <Input id="okul" name="okul" autoComplete="off" defaultValue={yetkinAlanFotograf} onChange={e => setyetkinAlanFotograf(e.target.value)} />
-                        <FormText color="muted">Yetkin olduğunuz alanı tanımlayan bir ikon yükleyiniz.</FormText>
+                        <FormText color="muted">Öncelikle https://fontawesome.com/ adresine gidelim. Daha sonra arama butonuna iconunu eklemek istediğimiz yetkin alan ismini yazalım.
+                        Mesela html gibi. Sonrasında arama sonucu ile karşımıza gelen iconlardan beğendiğimiz icona tıklayalım. Karşımıza gelen sayfada en üst kısımda yer alan
+                        mesela fab fa-html5 yazısının fa-html5 bölümünü kopyalayalım ve bu alana yapıştıralım.
+                        </FormText>
                       </Col>
                     </FormGroup>
 
@@ -122,7 +125,7 @@ const Yetkinlik = () => {
                 <Button onClick={sil} className="btn btn-danger btn-block">Sayfayı Komple Sil</Button>
               </CardFooter>
             </form>
-         
+
           </Card>
         </Col>
       </Row>

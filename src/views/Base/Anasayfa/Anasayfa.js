@@ -395,10 +395,9 @@ const Anasayfa = () => {
         carouselMeslekBilgisi: carouselMeslekBilgisi,
         carouselMeslekBilgisi2: carouselMeslekBilgisi2,
         carouselMeslekBilgisi3: carouselMeslekBilgisi3,
-        fotograf: fotograf,
-
       }
-      await firebase.addAnasayfaKisiselBilgi(data)
+      var foto = { fotograf: fotograf, }
+      await firebase.addAnasayfaKisiselBilgi(data,foto)
       console.log(data)
     } catch (error) {
       alert(error.message)

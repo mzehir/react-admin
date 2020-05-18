@@ -1,7 +1,6 @@
 import firebase from './config'
 import { useFieldArray } from 'react-hook-form'
 
-
 class Anasayfa {
 
     // ###########################      Anasayfa Bilgilerini Komple Getir         ###################################
@@ -26,22 +25,20 @@ class Anasayfa {
     // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
     // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
     // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
-    async addAnasayfaKisiselBilgi(KişiselBilgiler) {
+    async addAnasayfaKisiselBilgi(KişiselBilgiler, foto) {
         let anaSayfaDto = await this.getAnaSayfa();
         debugger
 
-        if (KişiselBilgiler.fotograf) {
-            alert("sdfds")
-            KişiselBilgiler.splice(5, 1)
-
-            //     const uploadTask = firebase.storage.ref(`deneme/${KişiselBilgiler.fotograf.name}`).put(KişiselBilgiler.fotograf);
-
-
-            //     // firebase.storage.ref(`deneme/${KişiselBilgiler.fotograf.name}`).put(KişiselBilgiler.fotograf);
+        if (foto.fotograf) {
+            firebase.storage.ref(`ProfilResmi/${foto.fotograf.name}`).put(foto.fotograf);
         }
 
 
 
+
+
+
+        debugger
         if (anaSayfaDto) {
             return firebase.db.collection(`admin`).doc("AnaSayfa").update({
                 KişiselBilgiler

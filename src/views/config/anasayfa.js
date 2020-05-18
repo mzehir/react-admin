@@ -28,7 +28,20 @@ class Anasayfa {
     // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
     async addAnasayfaKisiselBilgi(KişiselBilgiler) {
         let anaSayfaDto = await this.getAnaSayfa();
-        // if (anaSayfaDto && anaSayfaDto.KişiselBilgiler) {
+        debugger
+
+        if (KişiselBilgiler.fotograf) {
+            alert("sdfds")
+            KişiselBilgiler.splice(5, 1)
+
+            //     const uploadTask = firebase.storage.ref(`deneme/${KişiselBilgiler.fotograf.name}`).put(KişiselBilgiler.fotograf);
+
+
+            //     // firebase.storage.ref(`deneme/${KişiselBilgiler.fotograf.name}`).put(KişiselBilgiler.fotograf);
+        }
+
+
+
         if (anaSayfaDto) {
             return firebase.db.collection(`admin`).doc("AnaSayfa").update({
                 KişiselBilgiler

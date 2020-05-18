@@ -36,6 +36,11 @@ const Anasayfa = () => {
   const [sosyalMedyaIcon, setsosyalMedyaIcon] = useState('')
   const [sosyalMedyaList, setsosyalMedyaList] = useState([])
 
+  const [fotograf, setfotograf] = useState(null)
+
+
+
+
   useEffect(() => {
     firebase.getYetenek().then(((data) => {
       if (data) {
@@ -116,7 +121,7 @@ const Anasayfa = () => {
                         <Label for="exampleFile">Fotoğraf</Label>
                       </Col>
                       <Col xs="12" md="9">
-                        <Input type="file" name="file" id="exampleFile" />
+                        <Input type="file" name="file" id="exampleFile" onChange={e => setfotograf(e.target.files[0])} />
                         <FormText color="muted">
                           Lütfen buradan sitenizin ön yüzünde görünmek üzere fotoğraf yükleyiniz.
                       </FormText>
@@ -390,6 +395,8 @@ const Anasayfa = () => {
         carouselMeslekBilgisi: carouselMeslekBilgisi,
         carouselMeslekBilgisi2: carouselMeslekBilgisi2,
         carouselMeslekBilgisi3: carouselMeslekBilgisi3,
+        fotograf: fotograf,
+
       }
       await firebase.addAnasayfaKisiselBilgi(data)
       console.log(data)
@@ -449,16 +456,25 @@ const Anasayfa = () => {
 
 
 
-}
 
 
-
-async function silTumSayfa() {
-  try {
-    await firebase.deleteAnasayfa()
-  } catch (error) {
-    alert(error.message)
+  async function silTumSayfa() {
+    try {
+      await firebase.deleteAnasayfa()
+    } catch (error) {
+      alert(error.message)
+    }
   }
+
+
+
+
+
+
 }
+
+
+
+
 
 export default Anasayfa;

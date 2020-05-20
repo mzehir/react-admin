@@ -38,6 +38,8 @@ const Anasayfa = () => {
 
   const [fotograf, setfotograf] = useState(null)
 
+  const [cvBenim, setcvBenim] = useState(null)
+
 
 
 
@@ -194,6 +196,18 @@ const Anasayfa = () => {
                     {/* **************************************************************************************************************************** */}
 
                     {/* Buraya kullanıcı cvsini ekleyecek  */}
+
+                    <FormGroup row>
+                      <Col md="3">
+                        <Label for="exampleFile">CV</Label>
+                      </Col>
+                      <Col xs="12" md="9">
+                        <Input type="file" name="file" id="exampleFile" onChange={e => setcvBenim(e.target.files[0])} />
+                        <FormText color="muted">
+                          Lütfen buradan kendinize ait bir CV(PDF) yükleyiniz.
+                      </FormText>
+                      </Col>
+                    </FormGroup>
 
                     {/* Buraya kullanıcı cvsini ekleyecek */}
 
@@ -388,6 +402,8 @@ const Anasayfa = () => {
   async function kaydetKisiselBilgi() {
     try {
       var data = {
+        cvBenimName: cvBenim.name,
+        fotoName: fotograf.name,
         Meslek: Meslek,
         email: email,
         telefonNo: telefonNo,
@@ -396,8 +412,10 @@ const Anasayfa = () => {
         carouselMeslekBilgisi2: carouselMeslekBilgisi2,
         carouselMeslekBilgisi3: carouselMeslekBilgisi3,
       }
+      debugger
+      var cv = {cvBenim: cvBenim}
       var foto = { fotograf: fotograf, }
-      await firebase.addAnasayfaKisiselBilgi(data,foto)
+      await firebase.addAnasayfaKisiselBilgi(data, foto, cv)
       console.log(data)
     } catch (error) {
       alert(error.message)
@@ -436,7 +454,6 @@ const Anasayfa = () => {
     }
   }
 
-
   async function ekleSosyalMedyaHesap() {
     try {
       var data = {
@@ -451,12 +468,6 @@ const Anasayfa = () => {
 
 
 
-
-
-
-
-
-
   async function silTumSayfa() {
     try {
       await firebase.deleteAnasayfa()
@@ -466,14 +477,6 @@ const Anasayfa = () => {
   }
 
 
-
-
-
-
 }
-
-
-
-
 
 export default Anasayfa;

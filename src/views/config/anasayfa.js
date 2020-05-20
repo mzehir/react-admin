@@ -25,20 +25,15 @@ class Anasayfa {
     // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
     // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
     // ###########################      Kişisel Bilgiler Bilgilerini Gönder        ###################################
-    async addAnasayfaKisiselBilgi(KişiselBilgiler, foto) {
+    async addAnasayfaKisiselBilgi(KişiselBilgiler, foto, cv) {
         let anaSayfaDto = await this.getAnaSayfa();
-        debugger
+        if (cv.cvBenim) {
+            firebase.storage.ref(`CV/${cv.cvBenim.name}`).put(cv.cvBenim);
+        }
 
         if (foto.fotograf) {
             firebase.storage.ref(`ProfilResmi/${foto.fotograf.name}`).put(foto.fotograf);
         }
-
-
-
-
-
-
-        debugger
         if (anaSayfaDto) {
             return firebase.db.collection(`admin`).doc("AnaSayfa").update({
                 KişiselBilgiler

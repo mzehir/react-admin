@@ -1,15 +1,15 @@
 export default {
   items: [
-    {
-      name: 'Dashboard',
-      url: '/dashboard',
-      icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
-    },
-    
+    // {
+    //   name: 'Dashboard',
+    //   url: '/dashboard',
+    //   icon: 'icon-speedometer',
+    //   badge: {
+    //     variant: 'info',
+    //     text: 'NEW',
+    //   },
+    // },
+
 
     {
       name: 'Anasayfa',
@@ -22,7 +22,7 @@ export default {
       url: '/base/yetkinlik',
       icon: 'icon-puzzle',
     },
-  
+
     {
       name: 'Hakkımda',
       url: '/base/hakkimda',
@@ -30,8 +30,8 @@ export default {
     },
 
     {
-      name: 'Portfolio',
-      url: '/base/',
+      name: 'Calışmalarım',
+      url: '/base/calismalarim',
       icon: 'icon-puzzle',
     },
 
@@ -43,13 +43,13 @@ export default {
 
     {
       name: 'Testimonial',
-      url: '/base/',
+      url: '/base/testimonial',
       icon: 'icon-puzzle',
     },
 
     {
       name: 'Blog',
-      url: '/base/',
+      url: '/base/blog',
       icon: 'icon-puzzle',
     },
 
@@ -58,6 +58,6 @@ export default {
       url: '/base/iletisim',
       icon: 'icon-puzzle',
     },
-    
+
   ],
 };

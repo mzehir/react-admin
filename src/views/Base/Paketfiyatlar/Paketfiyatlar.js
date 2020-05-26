@@ -39,7 +39,8 @@ const Paketfiyatlar = () => {
   })
   return (
     <div className="animated fadeIn">
-      <Row>
+       <h2 className="text-center">BU SAYFA BAKIM ÇALIŞMASINDADIR. BU SAYFADA FREELANCER PAKET FİYATLAR İLE ALAKALI BİLGİLER ALINACAKTIR.</h2>
+      {/* <Row>
         <Col xs="12" md="12">
           <Card>
             <CardHeader className="text-center" >
@@ -208,43 +209,43 @@ const Paketfiyatlar = () => {
             </form>
           </Card>
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
-  async function kaydet() {
-    try {
-      var data = {
+  // async function kaydet() {
+  //   try {
+  //     var data = {
 
-        freelancerMeslek1: freelancerMeslek1,
-        freelancerFiyat1: freelancerFiyat1,
-        freelancerMeslek1OzellikA: freelancerMeslek1OzellikA,
+  //       freelancerMeslek1: freelancerMeslek1,
+  //       freelancerFiyat1: freelancerFiyat1,
+  //       freelancerMeslek1OzellikA: freelancerMeslek1OzellikA,
 
-        freelancerMeslek2: freelancerMeslek2,
-        freelancerFiyat2: freelancerFiyat2,
-        freelancerMeslek2OzellikA: freelancerMeslek2OzellikA,
+  //       freelancerMeslek2: freelancerMeslek2,
+  //       freelancerFiyat2: freelancerFiyat2,
+  //       freelancerMeslek2OzellikA: freelancerMeslek2OzellikA,
 
-        freelancerMeslek3: freelancerMeslek3,
-        freelancerFiyat3: freelancerFiyat3,
-        freelancerMeslek3OzellikA: freelancerMeslek3OzellikA,
+  //       freelancerMeslek3: freelancerMeslek3,
+  //       freelancerFiyat3: freelancerFiyat3,
+  //       freelancerMeslek3OzellikA: freelancerMeslek3OzellikA,
 
-      }
+  //     }
 
-      await firebase.addPaketfiyatlare(data)
+  //     await firebase.addPaketfiyatlare(data)
 
-    } catch (error) {
-      alert(error.message)
-    }
-  }
-  async function sil() {
-    try {
+  //   } catch (error) {
+  //     alert(error.message)
+  //   }
+  // }
+  // async function sil() {
+  //   try {
 
 
-      await firebase.deletePaketfiyatlare()
+  //     await firebase.deletePaketfiyatlare()
 
-    } catch (error) {
-      alert(error.message)
-    }
-  }
+  //   } catch (error) {
+  //     alert(error.message)
+  //   }
+  // }
 
 }
 

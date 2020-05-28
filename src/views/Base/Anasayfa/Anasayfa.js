@@ -426,7 +426,6 @@ const Anasayfa = () => {
       var cv = { cvBenim: cvBenim }
       var foto = { fotograf: fotograf, }
       await firebase.addAnasayfaKisiselBilgi(data, foto, cv)
-      console.log(data)
     } catch (error) {
       alert(error.message)
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import {
   Button,
   Card,
@@ -17,7 +17,6 @@ import {
 
 import firebase from '../../config/anasayfa'
 
-
 const Anasayfa = () => {
   const [Meslek, setMeslek] = useState('')
   const [email, setemail] = useState('')
@@ -28,20 +27,32 @@ const Anasayfa = () => {
   const [carouselMeslekBilgisi3, setcarouselMeslekBilgisi3] = useState('')
   const [onYazi, setonYazi] = useState('')
 
-  const [yetenekDali, setyetenekDali] = useState('')
-  const [yetenekYuzdesi, setyetenekYuzdesi] = useState('')
-  const [yetenekDalVeYuzdeList, setyetenekDalVeYuzdeList] = useState([])
-
   const [sosyalMedya, setsosyalMedya] = useState('')
   const [sosyalMedyaIcon, setsosyalMedyaIcon] = useState('')
-  const [sosyalMedyaList, setsosyalMedyaList] = useState([])
+
+  const [yetenekDali, setyetenekDali] = useState('')
+  const [yetenekYuzdesi, setyetenekYuzdesi] = useState('')
 
   const [fotograf, setfotograf] = useState(null)
-
   const [cvBenim, setcvBenim] = useState(null)
 
+  const [kisiselBilgilerList, setkisiselBilgilerList] = useState([])
+  const [hakkimdaList, sethakkimdaList] = useState([])
+
+  const [sosyalMedyaList, setsosyalMedyaList] = useState([])
+
+  const [yetenekDalVeYuzdeList, setyetenekDalVeYuzdeList] = useState([])
 
 
+
+  useEffect(() => {
+    firebase.getAnaSayfa().then(((data) => {
+      if (data) {
+        setkisiselBilgilerList(data.KişiselBilgiler)
+        sethakkimdaList(data.Hakkımda)
+      }
+    }))
+  }, [kisiselBilgilerList])
 
   useEffect(() => {
     firebase.getYetenek().then(((data) => {
@@ -50,7 +61,6 @@ const Anasayfa = () => {
       }
     }))
   }, [yetenekDalVeYuzdeList])
-
 
   useEffect(() => {
     firebase.getSosyalMedyaHesap().then(((data) => {
@@ -83,7 +93,7 @@ const Anasayfa = () => {
                         <Label htmlFor="text-input">Meslek</Label>
                       </Col>
                       <Col xs="12" md="9">
-                        <Input id="Meslek" name="Meslek" autoComplete="off" defaultValue={Meslek} onChange={e => setMeslek(e.target.value)} />
+                        <Input id="Meslek" name="Meslek" autoComplete="off" defaultValue={kisiselBilgilerList.Meslek} onChange={e => setMeslek(e.target.value)} />
                         <FormText color="muted">Lütfen bu alana meslek bilginizi giriniz. Mesela <strong>Yazılım Mühendisi</strong> gibi...</FormText>
                       </Col>
                     </FormGroup>
@@ -94,7 +104,7 @@ const Anasayfa = () => {
                       </Col>
                       <Col xs="12" md="9">
                         <input
-                          defaultValue={email}
+                          defaultValue={kisiselBilgilerList.email}
                           className="form-control"
                           name="email"
                           onChange={e => setemail(e.target.value)}
@@ -109,7 +119,7 @@ const Anasayfa = () => {
                       </Col>
                       <Col xs="12" md="9">
                         <input
-                          defaultValue={telefonNo}
+                          defaultValue={kisiselBilgilerList.telefonNo}
                           className="form-control"
                           name="adress"
                           onChange={e => settelefonNo(e.target.value)}
@@ -136,7 +146,7 @@ const Anasayfa = () => {
                       </Col>
                       <Col xs="12" md="9">
                         <input
-                          defaultValue={isimSoyİsim}
+                          defaultValue={kisiselBilgilerList.isimSoyİsim}
                           className="form-control"
                           name="telefon"
                           onChange={e => setisimSoyİsim(e.target.value)}
@@ -151,7 +161,7 @@ const Anasayfa = () => {
                       </Col>
                       <Col xs="12" md="9">
                         <input
-                          defaultValue=""
+                          defaultValue={kisiselBilgilerList.carouselMeslekBilgisi}
                           className="form-control"
                           type="carouselMeslekBilgisi"
                           name="carouselMeslekBilgisi"
@@ -167,7 +177,7 @@ const Anasayfa = () => {
                       </Col>
                       <Col xs="12" md="9">
                         <input
-                          defaultValue=""
+                          defaultValue={kisiselBilgilerList.carouselMeslekBilgisi2}
                           className="form-control"
                           type="carouselMeslekBilgisi2"
                           name="carouselMeslekBilgisi2"
@@ -183,7 +193,7 @@ const Anasayfa = () => {
                       </Col>
                       <Col xs="12" md="9">
                         <input
-                          defaultValue=""
+                          defaultValue={kisiselBilgilerList.carouselMeslekBilgisi3}
                           className="form-control"
                           type="carouselMeslekBilgisi3"
                           name="carouselMeslekBilgisi3"
@@ -377,6 +387,7 @@ const Anasayfa = () => {
                           className="form-control"
                           name="aciklama"
                           onChange={e => setonYazi(e.target.value)}
+                          defaultValue={hakkimdaList.onYazi}
                         />
                         <FormText color="muted">Lütfen bu alana sizi anlatan bir ön yazı giriniz.</FormText>
                       </Col>
@@ -412,8 +423,7 @@ const Anasayfa = () => {
         carouselMeslekBilgisi2: carouselMeslekBilgisi2,
         carouselMeslekBilgisi3: carouselMeslekBilgisi3,
       }
-      debugger
-      var cv = {cvBenim: cvBenim}
+      var cv = { cvBenim: cvBenim }
       var foto = { fotograf: fotograf, }
       await firebase.addAnasayfaKisiselBilgi(data, foto, cv)
       console.log(data)

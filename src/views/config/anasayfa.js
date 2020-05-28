@@ -8,11 +8,13 @@ class Anasayfa {
     // ###########################      Anasayfa Bilgilerini Komple Getir         ###################################
     async getAnaSayfa() {
         let cityRef = await firebase.db.collection('admin').doc('AnaSayfa');
+        debugger
         return await cityRef.get()
             .then(doc => {
                 if (!doc.exists) {
                     console.log('No such document!');
                 } else {
+                  debugger
                     var data = doc.data();
                     return data
                 }
